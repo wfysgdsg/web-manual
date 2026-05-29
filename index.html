@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__APP__ 个人借销货系统 — 产品介绍 & 使用手册</title>
+<style>
+/* ========== CSS Variables ========== */
+:root {
+  --primary: #4F6EF7;
+  --primary-dark: #3D56D4;
+  --primary-light: #EEF1FE;
+  --accent: #6C5CE7;
+  --success: #52c41a;
+  --danger: #ff4d4f;
+  --warning: #faad14;
+  --orange: #FF7A45;
+  --text: #1a1a2e;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --bg: #f5f6fa;
+  --bg-white: #ffffff;
+  --border: #e8e8e8;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.10);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,0.12);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --max-width: 1200px;
+}
+
+/* ========== Reset & Base ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== Navigation ========== */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid transparent; transition: var(--transition); }
+.nav.scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow); }
+.nav-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: var(--primary); text-decoration: none; }
+.nav-logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.92rem; font-weight: 500; transition: var(--transition); position: relative; }
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+.nav-mobile-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; padding: 4px; }
+@media (max-width: 768px) {
+  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 16px 24px; gap: 16px; box-shadow: var(--shadow-lg); }
+  .nav-links.show { display: flex; }
+  .nav-mobile-btn { display: block; }
+}
+
+/* ========== Hero ========== */
+.hero { padding: 120px 24px 80px; text-align: center; background: linear-gradient(160deg, #f0f3ff 0%, #eef1fe 30%, #f8f9ff 60%, #f5f3ff 100%); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(79,110,247,0.08) 0%, transparent 70%); border-radius: 50%; }
+.hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(108,92,231,0.06) 0%, transparent 70%); border-radius: 50%; }
+.hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge { display: inline-block; padding: 6px 18px; background: var(--primary-light); color: var(--primary); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+.hero h1 { font-size: 3rem; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+.hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-desc { font-size: 1.15rem; color: var(--text-secondary); max-width: 560px; margin: 0 auto 32px; line-height: 1.8; }
+.hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; box-shadow: 0 4px 16px rgba(79,110,247,0.35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(79,110,247,0.45); }
+.btn-outline { background: #fff; color: var(--primary); border: 2px solid var(--primary); }
+.btn-outline:hover { background: var(--primary-light); }
+.hero-qr { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+.qr-card { background: #fff; border-radius: var(--radius-lg); padding: 24px 32px; box-shadow: var(--shadow-lg); text-align: center; }
+.qr-placeholder { width: 160px; height: 160px; background: #f0f1f5; border: 2px dashed var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: var(--text-muted); font-size: 0.85rem; flex-direction: column; gap: 6px; position: relative; overflow: hidden; }
+.qr-placeholder svg { width: 40px; height: 40px; opacity: 0.4; }
+.qr-placeholder.has-img { border-style: solid; border-color: transparent; background: transparent; }
+.qr-placeholder.has-img svg,
+.qr-placeholder.has-img > span { display: none; }
+.qr-card p { font-size: 0.85rem; color: var(--text-muted); }
+.qr-info { text-align: left; }
+.qr-info p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
+.qr-info p strong { color: var(--text); }
+@media (max-width: 768px) {
+  .hero { padding: 100px 20px 60px; }
+  .hero h1 { font-size: 2rem; }
+  .hero-desc { font-size: 1rem; }
+  .hero-qr { flex-direction: column; }
+}
+
+/* ========== Section Common ========== */
+.section { padding: 80px 24px; }
+.section-inner { max-width: var(--max-width); margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-tag { display: inline-block; padding: 5px 16px; background: var(--primary-light); color: var(--primary); border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin-bottom: 12px; }
+.section-title { font-size: 2.2rem; font-weight: 700; color: var(--text); margin-bottom: 12px; letter-spacing: -0.5px; }
+.section-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+.section-alt { background: #fff; }
+@media (max-width: 768px) {
+  .section { padding: 50px 18px; }
+  .section-title { font-size: 1.6rem; }
+}
+
+/* ========== Features Grid ========== */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card { background: #fff; border-radius: var(--radius-lg); padding: 32px 28px; box-shadow: var(--shadow); transition: var(--transition); border: 1px solid transparent; position: relative; overflow: hidden; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); border-color: var(--primary-light); }
+.feature-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px; }
+.feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.feature-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+.feature-tag { display: inline-block; margin-top: 14px; padding: 3px 10px; background: var(--bg); border-radius: 6px; font-size: 0.78rem; color: var(--text-muted); }
+@media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+
+/* ========== Highlights ========== */
+.highlights-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.highlight-card { text-align: center; padding: 28px 20px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); transition: var(--transition); }
+.highlight-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.highlight-icon { width: 52px; height: 52px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 14px; }
+.highlight-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.highlight-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+@media (max-width: 900px) { .highlights-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .highlights-grid { grid-template-columns: 1fr; } }
+
+/* ========== Manual ========== */
+.manual-nav-wrap { position: sticky; top: 80px; z-index: 10; }
+.manual-toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; padding: 16px 20px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); }
+.manual-toc a { padding: 8px 18px; background: var(--bg); border-radius: 20px; font-size: 0.84rem; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition); white-space: nowrap; }
+.manual-toc a:hover, .manual-toc a.active { background: var(--primary); color: #fff; }
+
+.manual-section { margin-bottom: 56px; background: #fff; border-radius: 24px; padding: 48px 44px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 40px rgba(0,0,0,0.06); position: relative; overflow: hidden; }
+.manual-section::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 60px; background: linear-gradient(180deg, var(--primary), var(--accent)); border-radius: 0 4px 4px 0; }
+.manual-section:target { box-shadow: 0 0 0 3px var(--primary-light), 0 8px 40px rgba(0,0,0,0.08); }
+.manual-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.manual-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 12px; letter-spacing: -0.3px; }
+.manual-section h3 .step-num { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 12px; font-size: 0.9rem; font-weight: 700; flex-shrink: 0; box-shadow: 0 4px 12px rgba(79,110,247,0.3); }
+.manual-section .step-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-left: 50px; }
+
+/* -- Two-column layout for sections with screenshots -- */
+.manual-body { display: flex; gap: 40px; align-items: flex-start; }
+.manual-text { flex: 1; min-width: 0; }
+.manual-gallery { flex-shrink: 0; width: 220px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; align-self: flex-start; }
+@media (max-width: 860px) {
+  .manual-body { flex-direction: column-reverse; }
+  .manual-gallery { width: 100%; flex-direction: row; flex-wrap: wrap; justify-content: center; position: static; }
+  .manual-section { padding: 32px 24px; }
+}
+
+/* -- Phone Frame -- */
+.phone-frame { position: relative; width: 200px; flex-shrink: 0; background: #1a1a2e; border-radius: 24px; padding: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1), inset 0 0 0 2px #333; transition: var(--transition); }
+.phone-frame:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 16px 48px rgba(79,110,247,0.2), 0 4px 12px rgba(0,0,0,0.12), inset 0 0 0 2px #444; }
+.phone-notch { width: 60px; height: 6px; background: #333; border-radius: 3px; margin: 0 auto 8px; }
+.phone-screen { width: 100%; aspect-ratio: 9/16; background: #f5f6fa; border-radius: 14px; overflow: hidden; position: relative; }
+.phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone-screen .phone-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #bbb; font-size: 0.78rem; gap: 6px; background: #f0f1f5; }
+.phone-screen .phone-placeholder svg { width: 32px; height: 32px; opacity: 0.3; }
+.phone-label { text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 10px; font-weight: 500; }
+
+/* -- Step Cards -- */
+.step-block { margin-bottom: 24px; padding: 20px 24px; background: #fafbfd; border-radius: 14px; border: 1px solid var(--border); transition: var(--transition); }
+.step-block:hover { border-color: #d0d5f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.step-block:last-child { margin-bottom: 0; }
+.step-block h4 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; padding-left: 14px; border-left: 3px solid var(--primary); display: flex; align-items: center; gap: 6px; }
+.step-block p, .step-block li { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.8; }
+.step-block ul, .step-block ol { padding-left: 22px; margin: 6px 0; }
+.step-block li { margin-bottom: 6px; }
+.step-block li::marker { color: var(--primary); }
+
+/* -- Info Boxes refined -- */
+.info-box { padding: 16px 20px; border-radius: 12px; margin: 14px 0; font-size: 0.9rem; line-height: 1.7; display: flex; align-items: flex-start; gap: 10px; }
+.info-box::before { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.info-box.tip { background: #eef4ff; border: 1px solid #c5d5f7; color: #1a3a6b; }
+.info-box.tip::before { content: '💡'; }
+.info-box.warn { background: #fff8ed; border: 1px solid #f0d49e; color: #6b4200; }
+.info-box.warn::before { content: '⚠️'; }
+.info-box.danger { background: #fff1f0; border: 1px solid #ffccc7; color: #820014; }
+.info-box.danger::before { content: '🚫'; }
+.info-box.success { background: #f0faf0; border: 1px solid #b7eb8f; color: #135200; }
+.info-box.success::before { content: '✅'; }
+
+.formula-box { display: inline-block; padding: 10px 18px; background: #f9f0ff; border: 1px solid #d3adf7; border-radius: 8px; font-family: "SF Mono", "Fira Code", "Consolas", monospace; font-size: 0.88rem; color: #531dab; margin: 8px 4px; }
+
+.flow-steps { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 14px 0; }
+.flow-step { padding: 8px 18px; background: var(--primary-light); color: var(--primary); border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+.flow-arrow { color: var(--text-muted); font-weight: 700; font-size: 1rem; }
+
+/* Table style */
+.manual-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 8px; border-radius: 10px; overflow: hidden; }
+.manual-table th { background: #f5f6fa; padding: 12px 14px; text-align: left; font-weight: 600; color: var(--text); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.manual-table td { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; }
+.manual-table tr:last-child td { border-bottom: none; }
+
+/* Old screenshot elements - hide, now replaced by phone frames */
+.ss-placeholder, .screenshot-box, .screenshot-wrap { display: none; }
+
+/* ========== FAQ ========== */
+.faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 800px; margin: 0 auto; }
+.faq-item { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.faq-q { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--text); user-select: none; transition: var(--transition); }
+.faq-q:hover { color: var(--primary); }
+.faq-q::after { content: '+'; font-size: 1.3rem; color: var(--text-muted); transition: var(--transition); font-weight: 300; }
+.faq-item.open .faq-q::after { content: '−'; color: var(--primary); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+.faq-item.open .faq-a { max-height: 400px; padding: 0 24px 20px; }
+.faq-a p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; }
+
+/* ========== CTA Banner ========== */
+.cta-banner { background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: var(--radius-lg); padding: 48px 40px; text-align: center; color: #fff; }
+.cta-banner h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+.cta-banner p { font-size: 1rem; opacity: 0.9; margin-bottom: 24px; }
+.cta-banner .btn { background: #fff; color: var(--primary); }
+.cta-banner .btn:hover { background: #f0f1ff; }
+
+/* ========== Footer ========== */
+.footer { background: #1a1a2e; color: rgba(255,255,255,0.7); padding: 40px 24px; text-align: center; font-size: 0.85rem; }
+.footer a { color: rgba(255,255,255,0.9); text-decoration: none; }
+.footer a:hover { color: #fff; }
+
+/* ========== Animations ========== */
+.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== Back to Top ========== */
+.back-top { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; background: var(--primary); color: #fff; border: none; border-radius: 50%; font-size: 1.3rem; cursor: pointer; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(20px); transition: var(--transition); pointer-events: none; z-index: 99; display: flex; align-items: center; justify-content: center; }
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.back-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+/* ========== Screenshot placeholder ========== */
+.ss-placeholder { aspect-ratio: 9/16; max-width: 200px; width: 100%; background: #f0f1f5; border: 2px dashed var(--border); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); gap: 8px; position: relative; overflow: hidden; }
+.ss-placeholder svg { opacity: 0.35; }
+.ss-placeholder img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); display: none; z-index: 1; }
+.ss-placeholder.has-img { border-style: solid; border-color: var(--border); }
+.ss-placeholder.has-img svg,
+.ss-placeholder.has-img > span { display: none; }
+.ss-placeholder.has-img img { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ==================== Navigation ==================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-icon">📦</div>
+      __APP__
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">功能介绍</a></li>
+      <li><a href="#highlights">核心亮点</a></li>
+      <li><a href="#manual">使用手册</a></li>
+      <li><a href="#faq">常见问题</a></li>
+    </ul>
+    <button class="nav-mobile-btn" id="navMobileBtn" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+<!-- ==================== Hero ==================== -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🚀 微信小程序 · 云端管理</div>
+    <h1>个人<span>借销货</span>系统</h1>
+    <p class="hero-desc">
+      专为销售团队打造的轻量级管理工具。<br>
+      借货、销售、库存、报表 — 一个微信小程序全搞定，数据云端同步，随时随地掌握业务动态。
+    </p>
+    <div class="hero-cta">
+      <a href="#manual" class="btn btn-primary">📖 查看使用手册</a>
+      <a href="#features" class="btn btn-outline">✨ 了解功能</a>
+    </div>
+    <div class="hero-qr">
+      <div class="qr-card">
+        <div class="qr-placeholder">
+          <img src="images/qrcode.png" alt="小程序码" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:12px;display:none;z-index:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3" rx="0.5"/><rect x="18" y="14" width="3" height="3" rx="0.5"/><rect x="14" y="18" width="3" height="3" rx="0.5"/><rect x="18" y="18" width="3" height="3" rx="0.5"/></svg>
+          <span>小程序码</span>
+        </div>
+        <p>微信扫码使用</p>
+      </div>
+      <div class="qr-info">
+        <p>📱 <strong>AppID：</strong>wx6b4979a2bd3e0c24</p>
+        <p>🛠️ <strong>基础库：</strong>微信 3.15.0+</p>
+        <p>☁️ <strong>后端：</strong>微信云开发（云数据库 + 云函数）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Features ==================== -->
+<section class="section section-alt" id="features">
+  <div class="section-inner">
+    <div class="section-header animate-on-scroll">
+      <div class="section-tag">核心功能</div>
+      <h2 class="section-title">六大模块，覆盖全流程</h2>
+      <p class="section-subtitle">从商品入库到销售开票，从借货流转到数据报表，一站式管理</p>
+    </div>
+    <div class="features-grid">
+      <!-- 1 -->
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon" style="background:#eef1fe;">🏠</div>
+        <h3>首页仪表盘</h3>
+        <p>今日销售额、库存总数、未收款项一目了然。快捷操作入口，逾期借货和待处理调货实时提醒。</p>
+        <span class="feature-tag">实时概览 · 预警通知</span>
+      </div>
+      <!-- 2 -->
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon" style="background:#fff7e6;">📦</div>
+        <h3>商品库管理</h3>
+        <p>支持硬件/软件分类，含税售价管理。管理员可编辑删除，普通员工可添加商品。库存实时追踪。</p>
+        <span class="feature-tag">分类管理 · 权限控制</span>
+      </div>
+      <!-- 3 -->
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon" style="background:#fff1f0;">🔄</div>
+        <h3>借货流转</h3>
+        <p>员工向库存借货 → 销售 → 归还，全流程跟踪。支持按时间/商品双视图、批量选择归还、备注记录。</p>
+        <span class="feature-tag">借还跟踪 · 批量操作</span>
+      </div>
+      <!-- 4 -->
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon" style="background:#f6ffed;">📊</div>
+        <h3>销售开票</h3>
+        <p>智能毛利计算，硬件÷1.13、软件÷1.06 自动区分税率。开票金额（含税总额）一目了然，支持红冲作废。</p>
+        <span class="feature-tag">自动计税 · 红冲保护</span>
+      </div>
+      <!-- 5 -->
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon" style="background:#f9f0ff;">📈</div>
+        <h3>数据报表</h3>
+        <p>月报表、年度汇总、客户排行榜。已红冲数据自动排除，支持按销售人员筛选，空数据友好提示。</p>
+        <span class="feature-tag">多维度分析 · 自动过滤</span>
+      </div>
+      <!-- 6 -->
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon" style="background:#e6f7ff;">💳</div>
+        <h3>应收账款</h3>
+        <p>应收/已收双Tab切换，按客户分组展示。支持确认收款操作，已收款项显示收款时间。已红冲单自动排除。</p>
+        <span class="feature-tag">双Tab管理 · 按客户分组</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Highlights ==================== -->
+<section class="section" id="highlights">
+  <div class="section-inner">
+    <div class="section-header animate-on-scroll">
+      <div class="section-tag">为什么选择 __APP__</div>
+      <h2 class="section-title">核心亮点</h2>
+      <p class="section-subtitle">不仅仅是记录，更是业务保障</p>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-card animate-on-scroll">
+        <div class="highlight-icon" style="background:#e6f7ff;">☁️</div>
+        <h4>云端同步</h4>
+        <p>数据存储在微信云数据库，多设备自动同步，数据安全可靠</p>
+      </div>
+      <div class="highlight-card animate-on-scroll">
+        <div class="highlight-icon" style="background:#f6ffed;">🔒</div>
+        <h4>事务安全</h4>
+        <p>借货归还、调货接收、销售红冲均使用数据库事务，保证数据一致性</p>
+      </div>
+      <div class="highlight-card animate-on-scroll">
+        <div class="highlight-icon" style="background:#fff7e6;">👥</div>
+        <h4>权限分级</h4>
+        <p>管理员(root)可管理用户、编辑删除商品；普通员工专注业务操作</p>
+      </div>
+      <div class="highlight-card animate-on-scroll">
+        <div class="highlight-icon" style="background:#f9f0ff;">🧮</div>
+        <h4>智能计算</h4>
+        <p>自动区分硬件/软件税率，毛利 = 不含税收入 − 成本，开票金额 = 含税总额</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Manual ==================== -->
+<section class="section section-alt" id="manual">
+  <div class="section-inner">
+    <div class="section-header animate-on-scroll">
+      <div class="section-tag">详细教程</div>
+      <h2 class="section-title">使用手册</h2>
+      <p class="section-subtitle">从零开始，手把手教你使用每一个功能</p>
+    </div>
+
+    <!-- TOC -->
+    <div class="manual-toc animate-on-scroll" id="manualToc">
+      <a href="#m01">① 登录注册</a>
+      <a href="#m02">② 首页导航</a>
+      <a href="#m03">③ 商品管理</a>
+      <a href="#m04">④ 客户管理</a>
+      <a href="#m05">⑤ 借货流程</a>
+      <a href="#m06">⑥ 销售开票</a>
+      <a href="#m07">⑦ 红冲作废</a>
+      <a href="#m08">⑧ 调货功能</a>
+      <a href="#m09">⑨ 应收账款</a>
+      <a href="#m10">⑩ 数据报表</a>
+      <a href="#m11">⑪ 个人设置</a>
+      <a href="#m12">⑫ 数据导出</a>
+    </div>
+
+    <!-- ===== M01: 登录注册 ===== -->
+    <div class="manual-section animate-on-scroll" id="m01">
+      <h3><span class="step-num">1</span> 登录与注册</h3>
+      <p class="step-subtitle">首次使用需要管理员创建账号，然后登录系统</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/01-login.png" alt="登录页" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：登录页</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/02-home.png" alt="首页" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：首页（登录后）</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>首次登录</h4>
+        <ol>
+          <li>打开小程序，进入登录页面</li>
+          <li>输入管理员提供的<strong>用户名</strong>和<strong>密码</strong></li>
+          <li>点击「登录」按钮</li>
+          <li>登录成功后自动跳转到首页仪表盘</li>
+        </ol>
+        <div class="info-box tip">
+          💡 <strong>提示：</strong>登录页面支持「记住密码」功能，勾选后下次打开自动填充。已登录用户再次进入会直接跳转首页。
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>管理员创建用户</h4>
+        <ol>
+          <li>进入「我的」→「人员管理」（仅 root 管理员可见）</li>
+          <li>点击添加按钮，输入新用户的用户名、密码、姓名</li>
+          <li>选择角色：<strong>root</strong>（管理员，拥有全部权限）或 <strong>普通用户</strong>（业务操作权限）</li>
+          <li>保存后，新用户即可使用该账号登录</li>
+        </ol>
+      </div>
+
+      <div class="step-block">
+        <h4>修改密码</h4>
+        <ol>
+          <li>进入「我的」→「修改密码」</li>
+          <li>输入旧密码、新密码、确认新密码</li>
+          <li>点击保存，密码修改后自动更新登录令牌</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ===== M02: 首页导航 ===== -->
+    <div class="manual-section animate-on-scroll" id="m02">
+      <h3><span class="step-num">2</span> 首页仪表盘</h3>
+      <p class="step-subtitle">打开小程序的第一眼 — 全局业务概览</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/02-home.png" alt="首页仪表盘" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：首页概览</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>页面布局说明</h4>
+        <ul>
+          <li><strong>顶部横幅</strong>：显示问候语（早安/下午好/晚上好）+ 用户名 + 当前日期，右侧头像可点击进入个人资料</li>
+          <li><strong>统计卡片</strong>：今日销售额（你个人的）、个人库存总数、未收款项笔数（红色表示有待收款）</li>
+          <li><strong>网格数据</strong>：商品库总数、在借数量、本月销售单数</li>
+          <li><strong>预警栏</strong>：待处理调货请求（橙色）、逾期未归还借货（红色），有数据才显示</li>
+          <li><strong>快捷操作区</strong>：开票、借货、应收账款、联系人、报表、调货 — 6个快速入口</li>
+          <li><strong>应收账款预览</strong>：按客户分组的未收款项列表，点击展开查看详情</li>
+        </ul>
+      </div>
+
+      <div class="info-box tip">
+        💡 <strong>注意：</strong>首页数据仅显示<strong>你个人的</strong>销售和借货数据，不会看到其他同事的信息。管理员可以在报表中查看全局数据。
+      </div>
+    </div>
+
+    <!-- ===== M03: 商品管理 ===== -->
+    <div class="manual-section animate-on-scroll" id="m03">
+      <h3><span class="step-num">3</span> 商品库管理</h3>
+      <p class="step-subtitle">管理所有可销售的商品，包含分类、售价和库存</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/03-goods-list.png" alt="商品库列表" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：商品库列表</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/07-goods-add.png" alt="添加商品" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：添加商品</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>添加商品</h4>
+        <ol>
+          <li>点击底部「商品库」Tab → 右下角 <strong>+</strong> 浮动按钮</li>
+          <li>填写商品信息：
+            <ul>
+              <li><strong>商品名称</strong>：必填</li>
+              <li><strong>分类</strong>：硬件 / 软件（决定税率）</li>
+              <li><strong>单位</strong>：台、个、套等</li>
+              <li><strong>含税售价</strong>：实际卖给客户的价格（含税）</li>
+              <li><strong>成本价</strong>：进货成本</li>
+              <li><strong>库存数量</strong>：当前库存</li>
+            </ul>
+          </li>
+          <li>点击保存</li>
+        </ol>
+        <div class="info-box tip">
+          💡 <strong>税率说明：</strong>硬件类商品税率 13%（除以 1.13），软件类商品税率 6%（除以 1.06）。系统在计算毛利时自动应用对应税率。含税售价 ÷ 税率 = 不含税收入，毛利 = 不含税收入 − 成本。
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>编辑 / 删除商品</h4>
+        <ul>
+          <li>仅 <strong>管理员（root）</strong>可以编辑和删除商品</li>
+          <li>在商品列表中点击编辑按钮进入编辑页</li>
+          <li>普通用户可以添加商品，但看不到编辑/删除按钮</li>
+        </ul>
+      </div>
+
+      <div class="step-block">
+        <h4>搜索与缓存</h4>
+        <ul>
+          <li>顶部搜索框支持按商品名称搜索</li>
+          <li>列表数据有本地缓存，切换页面秒开，后台静默更新</li>
+          <li>下拉刷新可手动获取最新数据</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== M04: 客户管理 ===== -->
+    <div class="manual-section animate-on-scroll" id="m04">
+      <h3><span class="step-num">4</span> 客户与联系人管理</h3>
+      <p class="step-subtitle">管理客户单位和联系人，销售开票和借货时快速选择</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/11-contact-list.png" alt="联系人列表" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：联系人列表</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/12-contact-add.png" alt="添加联系人" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：添加联系人</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>联系人（客户/厂家）</h4>
+        <ol>
+          <li>首页快捷操作 → 「联系人」入口，或在销售/借货页面点击新增客户</li>
+          <li>列表页顶部 Tab：全部 / 客户 / 厂家 三种视图</li>
+          <li>客户标签为<strong>绿色</strong>，厂家标签为<strong>紫色</strong></li>
+          <li>支持按名称和备注搜索</li>
+        </ol>
+      </div>
+
+      <div class="step-block">
+        <h4>添加联系人</h4>
+        <ul>
+          <li>选择类型：客户 或 厂家</li>
+          <li>填写名称（必填）和联系方式（选填）</li>
+          <li>填写备注信息（选填）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== M05: 借货流程 ===== -->
+    <div class="manual-section animate-on-scroll" id="m05">
+      <h3><span class="step-num">5</span> 借货流程</h3>
+      <p class="step-subtitle">借货 → 销售 → 归还，完整业务流程</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/04-borrow-list.png" alt="借货列表" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：借货列表</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/08-borrow-add.png" alt="添加借货" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：添加借货</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/10-borrow-detail.png" alt="借货详情" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：借货详情</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>整体流程</h4>
+        <div class="flow-steps">
+          <span class="flow-step">📦 添加借货</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">🏪 销售商品</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">↩️ 归还未售商品</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>添加借货</h4>
+        <ol>
+          <li>进入「借货」Tab → 点击右下角 <strong>+</strong> 按钮</li>
+          <li>选择<strong>客户</strong>（或点击"+ 新增客户"添加）</li>
+          <li>选择<strong>商品</strong>（可添加多个商品，点击"+ 新增商品"添加）</li>
+          <li>每行商品可修改<strong>数量</strong>和<strong>售价</strong>（默认取商品库售价）</li>
+          <li>选择<strong>借货日期</strong>，可填写备注</li>
+          <li>点击「确认借货」提交</li>
+        </ol>
+        <div class="info-box warn">
+          ⚠️ <strong>注意：</strong>借货数量不能超过当前库存。借出后库存会相应减少。
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>借货列表（双Tab）</h4>
+        <ul>
+          <li><strong>借货详情 Tab</strong>：按客户显示你的所有借货记录，支持搜索客户名或商品名</li>
+          <li><strong>我的库存 Tab</strong>：显示你当前手上的库存（已借出未还 + 未售出的），只显示数量 > 0 的商品</li>
+          <li>支持排序：数量多→少，最近借货新→旧</li>
+        </ul>
+      </div>
+
+      <div class="step-block">
+        <h4>归还商品</h4>
+        <ol>
+          <li>在借货列表点击进入某条借货的<strong>详情页</strong></li>
+          <li>详情页支持两种视图：<strong>按时间</strong>或<strong>按商品</strong>查看</li>
+          <li><strong>单个归还</strong>：点击每条记录旁的「归还」按钮，输入归还数量</li>
+          <li><strong>批量归还</strong>：点击右上角「批量归还」→ 勾选要归还的商品 → 确认归还</li>
+          <li>归还会触发<strong>云函数事务</strong>：库存 +1，借货状态更新为 returned</li>
+        </ul>
+        <div class="info-box success">
+          ✅ <strong>事务保障：</strong>归还操作使用数据库事务，确保库存恢复和状态更新同时成功或同时失败，杜绝数据不一致。
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>借货状态说明</h4>
+        <table style="width:100%; border-collapse:collapse; font-size:0.9rem; margin-top:8px;">
+          <tr style="background:#f5f6fa;"><th style="padding:10px;text-align:left;">状态</th><th style="padding:10px;text-align:left;">含义</th></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid #eee;">🟡 pending</td><td style="padding:10px;border-bottom:1px solid #eee;">借出中，尚未归还</td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid #eee;">🟢 returned</td><td style="padding:10px;border-bottom:1px solid #eee;">已全部归还</td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid #eee;">🔵 sold</td><td style="padding:10px;border-bottom:1px solid #eee;">已销售（通过开票自动标记）</td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid #eee;">🟠 transferring</td><td style="padding:10px;border-bottom:1px solid #eee;">调货中，等待对方收货</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== M06: 销售开票 ===== -->
+    <div class="manual-section animate-on-scroll" id="m06">
+      <h3><span class="step-num">6</span> 销售开票</h3>
+      <p class="step-subtitle">开具销售单，自动计算毛利和税额</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/05-sale-list.png" alt="销售列表" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：销售列表</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/09-sale-add.png" alt="添加销售" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：添加销售</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>开票流程</h4>
+        <ol>
+          <li>进入「销售」Tab → 点击右下角 <strong>+</strong> 按钮</li>
+          <li>选择<strong>客户</strong></li>
+          <li>选择<strong>商品</strong>（可从商品库选择，或自动带入你的借货商品）</li>
+          <li>填写每行商品的<strong>数量</strong>和<strong>含税售价</strong></li>
+          <li>选择<strong>付款状态</strong>：未付款 / 已付款（默认未付款，避免误操作）</li>
+          <li>底部「本单预览」实时显示：
+            <ul>
+              <li>📘 <strong>开票金额</strong>（含税总额）= 数量 × 含税售价（蓝色高亮显示）</li>
+              <li>📊 <strong>销售金额</strong>（不含税收入）= 含税价 ÷ 税率</li>
+              <li>💰 <strong>毛利</strong> = 不含税收入 − 成本</li>
+            </ul>
+          </li>
+          <li>确认无误后提交</li>
+        </ol>
+      </div>
+
+      <div class="step-block">
+        <h4>税额计算规则</h4>
+        <div class="formula-box">硬件：不含税收入 = 含税售价 ÷ 1.13</div>
+        <div class="formula-box" style="margin-left:12px;">软件：不含税收入 = 含税售价 ÷ 1.06</div>
+        <div class="formula-box" style="margin-left:12px;">毛利 = 不含税收入 − 成本价</div>
+        <div class="formula-box" style="margin-left:12px;">开票金额 = 数量 × 含税售价</div>
+        <div class="info-box tip">
+          💡 <strong>开票金额 vs 销售金额：</strong>开票金额是你开给客户发票上的实际金额（含税），销售金额是财务意义上的不含税收入。系统同时记录两者。
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>销售列表筛选</h4>
+        <ul>
+          <li><strong>状态标签栏</strong>：未付款 / 已结清 / 已红冲 / 全部，带数量统计</li>
+          <li><strong>搜索框</strong>：按客户名实时搜索</li>
+          <li><strong>月份选择器</strong>：切换不同月份</li>
+          <li><strong>排序</strong>：时间升降、金额升降</li>
+          <li>顶部汇总栏显示：本月合计（销售金额 + 开票金额）</li>
+          <li>每条记录底部显示开票金额（蓝色）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== M07: 红冲作废 ===== -->
+    <div class="manual-section animate-on-scroll" id="m07">
+      <h3><span class="step-num">7</span> 红冲作废</h3>
+      <p class="step-subtitle">开错票了？红冲功能帮你安全作废并恢复数据</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/05-sale-list.png" alt="销售列表-红冲按钮" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：红冲操作</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>使用场景</h4>
+        <p>开票后发现商品类目、价格或数量有误，需要作废原单重新开票时使用。</p>
+      </div>
+
+      <div class="step-block">
+        <h4>红冲规则</h4>
+        <ul>
+          <li>❌ <strong>已结清单</strong>不可红冲（已收款确认的单据受保护）</li>
+          <li>❌ <strong>已红冲单</strong>不可重复操作</li>
+          <li>✅ 所有人可以红冲<strong>自己名下</strong>的销售单</li>
+        </ul>
+      </div>
+
+      <div class="step-block">
+        <h4>操作步骤</h4>
+        <ol>
+          <li>进入「销售」列表，找到要作废的销售单</li>
+          <li>点击该单右侧的「<strong>红冲</strong>」按钮</li>
+          <li>确认弹窗中点击确认</li>
+          <li>系统自动执行（事务保护）：
+            <ul>
+              <li>标记该销售单为"已红冲"</li>
+              <li>恢复对应商品的<strong>库存</strong></li>
+              <li>恢复对应的<strong>借货状态</strong>（sold → pending）</li>
+            </ul>
+          </li>
+          <li>手动重新开正确的销售单</li>
+        </ol>
+        <div class="info-box success">
+          ✅ <strong>事务保护：</strong>红冲操作在一个数据库事务中完成，标记红冲、恢复库存、恢复借货状态要么全部成功，要么全部回滚。
+        </div>
+        <div class="info-box warn">
+          ⚠️ <strong>注意：</strong>红冲后的销售单会在列表中显示红色「已红冲」标签，所有报表和汇总统计会自动排除已红冲单。
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== M08: 调货功能 ===== -->
+    <div class="manual-section animate-on-scroll" id="m08">
+      <h3><span class="step-num">8</span> 调货功能</h3>
+      <p class="step-subtitle">同事之间互相调拨货物</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/10-borrow-detail.png" alt="发起调货" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：发起调货</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/15-transfer.png" alt="调货列表" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：调货接收</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>调货流程</h4>
+        <div class="flow-steps">
+          <span class="flow-step">📤 发起方选择商品</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">👤 选择接收人</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">📨 发送调货请求</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">📥 接收方确认收货</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>发起调货</h4>
+        <ol>
+          <li>进入借货详情页，点击「<strong>调货</strong>」按钮</li>
+          <li>选择要调出的商品和数量（每项可独立设置）</li>
+          <li>选择接收员工</li>
+          <li>确认发送，系统创建调货请求，原借货标记为 transferring</li>
+        </ol>
+      </div>
+
+      <div class="step-block">
+        <h4>接收调货</h4>
+        <ol>
+          <li>进入调货列表页（借货 Tab 内入口，或首页预警栏）</li>
+          <li>双 Tab 布局：<strong>待处理</strong> / <strong>处理记录</strong></li>
+          <li>在待处理列表中找到待接收的调货</li>
+          <li>点击确认收货</li>
+          <li>系统事务处理：
+            <ul>
+              <li>发方原借货扣减（全量→标记 returned，部分→数量扣减）</li>
+              <li>发方库存减少</li>
+              <li>接方创建新的 pending 借货记录</li>
+              <li>接方库存增加</li>
+            </ul>
+          </li>
+        </ol>
+        <div class="info-box tip">
+          💡 首页会显示待处理调货数量，方便及时处理。
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== M09: 应收账款 ===== -->
+    <div class="manual-section animate-on-scroll" id="m09">
+      <h3><span class="step-num">9</span> 应收账款管理</h3>
+      <p class="step-subtitle">追踪哪些客户还没付款，管理已收款记录</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/13-sale-debt.png" alt="应收账款" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：应收账款页</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>功能说明</h4>
+        <ul>
+          <li>入口：首页快捷操作「应收账款」，或销售 Tab 内入口</li>
+          <li><strong>双 Tab 布局</strong>：应收账款 / 已收款项</li>
+          <li><strong>应收账款 Tab</strong>：按客户分组显示所有未结清的销售单，点击展开查看每条明细（商品、数量、价格、毛利）</li>
+          <li><strong>已收款项 Tab</strong>：绿色头部卡片显示已收总额，按客户分组展示，显示收款时间</li>
+          <li>已红冲的销售单自动排除，不计入应收/已收</li>
+        </ul>
+      </div>
+
+      <div class="step-block">
+        <h4>确认收款</h4>
+        <ol>
+          <li>在销售列表中找到已付款的销售单</li>
+          <li>点击「确认收款」按钮</li>
+          <li>该单从"未付款"变为"已结清"，出现在已收款项列表中</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ===== M10: 数据报表 ===== -->
+    <div class="manual-section animate-on-scroll" id="m10">
+      <h3><span class="step-num">10</span> 数据报表</h3>
+      <p class="step-subtitle">多维度查看销售数据，掌握业务趋势</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/14-report.png" alt="月报表" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：月报表</span>
+        </div>
+        <div class="ss-placeholder">
+          <img src="images/14-report.png" alt="年度汇总" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：年度汇总</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>月报表</h4>
+        <ul>
+          <li>入口：首页快捷操作「报表」</li>
+          <li>默认显示<strong>本月</strong>数据，可切换月份</li>
+          <li>按销售人员统计：销售金额、毛利、订单数</li>
+          <li>无数据时段显示友好提示："该时段暂无销售数据，切换月份或年份试试"</li>
+          <li>已红冲单自动排除</li>
+        </ul>
+      </div>
+
+      <div class="step-block">
+        <h4>年度汇总 + 客户排行榜</h4>
+        <ul>
+          <li>年度汇总：全年销售金额、毛利汇总</li>
+          <li>客户排行榜：按消费金额排序的客户排名</li>
+          <li>支持按销售人员筛选（管理员可看所有人）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== M11: 个人设置 ===== -->
+    <div class="manual-section animate-on-scroll" id="m11">
+      <h3><span class="step-num">11</span> 个人设置</h3>
+      <p class="step-subtitle">管理个人资料、头像和密码</p>
+
+      <div class="screenshot-wrap">
+        <div class="ss-placeholder">
+          <img src="images/16-profile-edit.png" alt="个人资料" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>截图：个人资料页</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <h4>编辑资料</h4>
+        <ol>
+          <li>进入「我的」Tab → 点击头像区域</li>
+          <li>可设置：<strong>头像</strong>（从相册选择，上传到云存储）</li>
+          <li>可设置：<strong>昵称</strong>（显示优先级：昵称 > 姓名 > 用户名）</li>
+          <li>可设置：<strong>个性签名</strong></li>
+        </ol>
+      </div>
+
+      <div class="step-block">
+        <h4>修改密码</h4>
+        <ol>
+          <li>「我的」→ 修改密码</li>
+          <li>输入旧密码确认身份</li>
+          <li>输入并确认新密码</li>
+          <li>修改后自动更新登录令牌，无需重新登录</li>
+        </ol>
+      </div>
+
+      <div class="step-block">
+        <h4>退出登录</h4>
+        <p>「我的」→ 退出登录，会清除所有本地缓存（记住密码、头像等），返回登录页。</p>
+      </div>
+    </div>
+
+    <!-- ===== M12: 数据导出 ===== -->
+    <div class="manual-section animate-on-scroll" id="m12">
+      <h3><span class="step-num">12</span> 数据导出</h3>
+      <p class="step-subtitle">将业务数据导出为文件，方便备份和分析</p>
+
+      <div class="step-block">
+        <h4>导出类型</h4>
+        <ul>
+          <li>📊 <strong>销售数据导出</strong></li>
+          <li>📦 <strong>商品数据导出</strong></li>
+          <li>🔄 <strong>借货数据导出</strong></li>
+          <li>📤 <strong>调货数据导出</strong>（普通用户只能导出自己相关的）</li>
+        </ul>
+      </div>
+
+      <div class="step-block">
+        <h4>操作步骤</h4>
+        <ol>
+          <li>进入「我的」→ 数据导出</li>
+          <li>选择要导出的数据类型</li>
+          <li>选择日期范围（可选）</li>
+          <li>点击导出，系统拉取全量数据生成文件</li>
+        </ol>
+      </div>
+
+      <div class="info-box tip">
+        💡 <strong>权限：</strong>普通用户导出调货数据时自动过滤，只能看到自己作为发送方或接收方的记录。
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-banner animate-on-scroll" style="margin-top:40px;">
+      <h3>准备好开始了吗？</h3>
+      <p>打开微信，扫码即可开始使用</p>
+      <div class="qr-placeholder" style="width:140px;height:140px;margin:0 auto 18px;background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.8);">
+        <img src="images/qrcode.png" alt="小程序码" onerror="this.style.display='none'" onload="this.style.display='block';this.parentElement.classList.add('has-img')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:12px;display:none;z-index:1;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3" rx="0.5"/><rect x="18" y="14" width="3" height="3" rx="0.5"/><rect x="14" y="18" width="3" height="3" rx="0.5"/><rect x="18" y="18" width="3" height="3" rx="0.5"/></svg>
+        <span style="font-size:0.75rem;">小程序码</span>
+      </div>
+      <a href="#manual" class="btn">📖 返回使用手册</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-header animate-on-scroll">
+      <div class="section-tag">常见疑问</div>
+      <h2 class="section-title">常见问题 FAQ</h2>
+      <p class="section-subtitle">使用中可能遇到的问题，这里都有答案</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">借货和销售有什么区别？</div>
+        <div class="faq-a"><p>
+          <strong>借货</strong>是你从库存中取出商品带在身上去销售的过程。借货后库存减少，但还没有产生销售收入。<br>
+          <strong>销售</strong>是实际开票给客户，记录销售收入和毛利。销售开票时会自动关联你借出的商品，标记为"已销售"状态。<br>
+          简单理解：先借货 → 再开票销售 → 未售出的归还。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">红冲是什么？什么时候需要红冲？</div>
+        <div class="faq-a"><p>
+          红冲是财务术语，指作废一张已开的销售单。当你在销售开票后发现商品选错了、价格填错了、数量不对等情况，就可以用红冲功能作废原单。红冲后，库存和借货状态会自动恢复，你可以重新开正确的票。<br>
+          <strong>注意：</strong>已确认收款的已结清单不可红冲。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">硬件和软件的税额是怎么算的？</div>
+        <div class="faq-a"><p>
+          硬件类商品适用 <strong>13% 增值税率</strong>，不含税收入 = 含税售价 ÷ 1.13。<br>
+          软件类商品适用 <strong>6% 增值税率</strong>，不含税收入 = 含税售价 ÷ 1.06。<br>
+          毛利 = 不含税收入 − 成本价。<br>
+          系统在开票时自动根据商品分类选择正确的税率计算。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">忘记密码怎么办？</div>
+        <div class="faq-a"><p>
+          请联系<strong>管理员（root 账号）</strong>重置密码。管理员在「人员管理」中可以重置任何用户的密码。出于安全考虑，系统不提供自助找回密码功能。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">调货和借货有什么关系？</div>
+        <div class="faq-a"><p>
+          调货是指你把手上的借货商品转给另一位同事。比如 A 借了 10 台设备，B 那边正好有客户需要，A 可以通过调货功能把其中 3 台转给 B。调货后 A 的库存减少、B 的库存增加，B 收到后可以直接销售或归还。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">首页显示的数据是所有人的还是我自己的？</div>
+        <div class="faq-a"><p>
+          首页显示的<strong>今日销售额、库存总数、未收款项、借货数量</strong>都是你<strong>个人的</strong>数据，不会看到其他同事的信息。管理员可以在报表页面查看全局数据。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">可以在电脑上使用吗？</div>
+        <div class="faq-a"><p>
+          可以！微信小程序支持在<strong>电脑版微信</strong>中直接打开使用。不过头像显示等少部分功能在电脑模拟器中可能受限（真机正常）。建议在手机上使用以获得完整体验。
+        </p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-q">数据安全吗？会不会丢失？</div>
+        <div class="faq-a"><p>
+          所有数据存储在<strong>微信云数据库</strong>中，由腾讯云提供底层存储保障，数据可靠性极高。关键操作（归还、红冲、调货确认）均使用<strong>数据库事务</strong>保护，保证数据一致性。建议定期使用「数据导出」功能做本地备份。
+        </p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Footer ==================== -->
+<footer class="footer">
+  <div class="section-inner">
+    <p>__APP__ 个人借销货系统 · 基于微信小程序 + 云开发</p>
+    <p style="margin-top:4px;opacity:0.6;">AppID: wx6b4979a2bd3e0c24 · 基础库 3.15.0+</p>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" aria-label="返回顶部">↑</button>
+
+<script>
+// ========== Nav scroll effect ==========
+const nav = document.getElementById('nav');
+const backTop = document.getElementById('backTop');
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 60;
+  nav.classList.toggle('scrolled', scrolled);
+  backTop.classList.toggle('show', window.scrollY > 500);
+});
+
+// ========== Mobile nav toggle ==========
+const navMobileBtn = document.getElementById('navMobileBtn');
+const navLinks = document.getElementById('navLinks');
+navMobileBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});
+
+// Close mobile nav on link click
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('show'));
+});
+
+// ========== Scroll animation ==========
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// ========== Back to top ==========
+backTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ========== FAQ accordion ==========
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Toggle clicked
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// ========== Active nav link on scroll ==========
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 100;
+    if (window.scrollY >= top) {
+      current = section.getAttribute('id');
+    }
+  });
+  navAs.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ========== Manual TOC active ==========
+const manualToc = document.getElementById('manualToc');
+if (manualToc) {
+  const tocLinks = manualToc.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    document.querySelectorAll('.manual-section[id]').forEach(section => {
+      if (window.scrollY >= section.offsetTop - 120) {
+        current = section.getAttribute('id');
+      }
+    });
+    tocLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+}
+
+// ========== Beautify Manual Sections ==========
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.manual-section').forEach(section => {
+    // Collect all screenshot placeholders
+    const placeholders = section.querySelectorAll('.ss-placeholder, .screenshot-box');
+    if (placeholders.length === 0) return;
+
+    // Get or create header wrapper
+    const h3 = section.querySelector('h3');
+    const subtitle = section.querySelector('.step-subtitle');
+    let header = section.querySelector('.manual-header');
+    if (!header && h3) {
+      header = document.createElement('div');
+      header.className = 'manual-header';
+      const h3Parent = h3.parentNode;
+      h3Parent.insertBefore(header, h3);
+      header.appendChild(h3);
+      if (subtitle) header.appendChild(subtitle);
+    }
+
+    // Create gallery
+    const gallery = document.createElement('div');
+    gallery.className = 'manual-gallery';
+
+    placeholders.forEach((ph, i) => {
+      const img = ph.querySelector('img');
+      const labelSpan = ph.querySelector('span');
+      const label = labelSpan ? labelSpan.textContent.trim() : '';
+
+      const frame = document.createElement('div');
+      frame.className = 'phone-frame';
+      frame.style.animationDelay = (i * 0.1) + 's';
+
+      const notch = document.createElement('div');
+      notch.className = 'phone-notch';
+      frame.appendChild(notch);
+
+      const screen = document.createElement('div');
+      screen.className = 'phone-screen';
+
+      if (img && img.src && !img.src.includes('placeholder')) {
+        const newImg = document.createElement('img');
+        newImg.src = img.src;
+        newImg.alt = img.alt || label;
+        newImg.loading = 'lazy';
+        screen.appendChild(newImg);
+      } else {
+        const phDiv = document.createElement('div');
+        phDiv.className = 'phone-placeholder';
+        phDiv.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>截图</span>';
+        screen.appendChild(phDiv);
+      }
+
+      frame.appendChild(screen);
+
+      if (label) {
+        const labelEl = document.createElement('div');
+        labelEl.className = 'phone-label';
+        labelEl.textContent = label;
+        frame.appendChild(labelEl);
+      }
+
+      gallery.appendChild(frame);
+      ph.remove(); // Remove old placeholder
+    });
+
+    // Also remove leftover screenshot-wrap containers
+    section.querySelectorAll('.screenshot-wrap').forEach(w => {
+      if (w.children.length === 0 || w.querySelector('.phone-frame')) w.remove();
+    });
+
+    // Create two-column body
+    const body = document.createElement('div');
+    body.className = 'manual-body';
+
+    const textCol = document.createElement('div');
+    textCol.className = 'manual-text';
+
+    // Move remaining content (after header) into text column
+    if (header) {
+      let next = header.nextElementSibling;
+      while (next) {
+        const toMove = next;
+        next = next.nextElementSibling;
+        if (toMove === gallery || toMove.classList.contains('manual-body')) continue;
+        textCol.appendChild(toMove);
+      }
+    } else {
+      // No header case - move all children
+      while (section.firstChild) {
+        const child = section.firstChild;
+        if (child === gallery || child.classList.contains('manual-body')) {
+          section.appendChild(child); // re-append to end
+          continue;
+        }
+        textCol.appendChild(child);
+      }
+    }
+
+    body.appendChild(textCol);
+    body.appendChild(gallery);
+    section.appendChild(body);
+  });
+
+  // Fix tables to use manual-table class
+  document.querySelectorAll('.manual-section table').forEach(t => {
+    if (!t.classList.contains('manual-table')) t.classList.add('manual-table');
+  });
+});
+</script>
+
+</body>
+</html>
